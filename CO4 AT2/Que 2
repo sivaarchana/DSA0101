@@ -1,0 +1,193 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class
+class Person
+{
+protected:
+    string name;
+    string address;
+    long phone_no;
+
+public:
+    void acceptPerson()
+    {
+        cout << "Enter Name: ";
+        cin >> name;
+
+        cout << "Enter Address: ";
+        cin >> address;
+
+        cout << "Enter Phone Number: ";
+        cin >> phone_no;
+    }
+
+    void displayPerson()
+    {
+        cout << "Name: " << name << endl;
+        cout << "Address: " << address << endl;
+        cout << "Phone Number: " << phone_no << endl;
+    }
+};
+
+// Derived class Employee
+class Employee : public Person
+{
+    int eno;
+    string ename;
+
+public:
+    void acceptEmployee()
+    {
+        acceptPerson();
+
+        cout << "Enter Employee Number: ";
+        cin >> eno;
+
+        cout << "Enter Employee Name: ";
+        cin >> ename;
+    }
+
+    void displayEmployee()
+    {
+        displayPerson();
+
+        cout << "Employee Number: " << eno << endl;
+        cout << "Employee Name: " << ename << endl;
+    }
+};
+
+// Derived class Manager
+class Manager : public Person
+{
+    string designation;
+    string department_name;
+    double basic_salary;
+
+public:
+    void acceptManager()
+    {
+        acceptPerson();
+
+        cout << "Enter Designation: ";
+        cin >> designation;
+
+        cout << "Enter Department Name: ";
+        cin >> department_name;
+
+        cout << "Enter Basic Salary: ";
+        cin >> basic_salary;
+    }
+
+    void displayManager()
+    {
+        displayPerson();
+
+        cout << "Designation: " << designation << endl;
+        cout << "Department: " << department_name << endl;
+        cout << "Basic Salary: Rs. " << basic_salary << endl;
+    }
+
+    double getSalary()
+    {
+        return basic_salary;
+    }
+};
+
+int main()
+{
+    int n;
+    int choice;
+
+    cout << "Enter number of Employees and Managers: ";
+    cin >> n;
+
+    Employee emp[50];
+    Manager mgr[50];
+
+    do
+    {
+        cout << "\n===== MENU =====" << endl;
+        cout << "1. Accept Employee Details" << endl;
+        cout << "2. Accept Manager Details" << endl;
+        cout << "3. Display Employee Details" << endl;
+        cout << "4. Display Manager Details" << endl;
+        cout << "5. Display Manager with Highest Salary" << endl;
+        cout << "6. Exit" << endl;
+
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            cout << "\n--- Enter Employee Details ---" << endl;
+
+            for (int i = 0; i < n; i++)
+            {
+                cout << "\nEmployee " << i + 1 << endl;
+                emp[i].acceptEmployee();
+            }
+            break;
+
+        case 2:
+            cout << "\n--- Enter Manager Details ---" << endl;
+
+            for (int i = 0; i < n; i++)
+            {
+                cout << "\nManager " << i + 1 << endl;
+                mgr[i].acceptManager();
+            }
+            break;
+
+        case 3:
+            cout << "\n--- Employee Details ---" << endl;
+
+            for (int i = 0; i < n; i++)
+            {
+                cout << "\nEmployee " << i + 1 << endl;
+                emp[i].displayEmployee();
+            }
+            break;
+
+        case 4:
+            cout << "\n--- Manager Details ---" << endl;
+
+            for (int i = 0; i < n; i++)
+            {
+                cout << "\nManager " << i + 1 << endl;
+                mgr[i].displayManager();
+            }
+            break;
+
+        case 5:
+        {
+            int highest = 0;
+
+            for (int i = 1; i < n; i++)
+            {
+                if (mgr[i].getSalary() > mgr[highest].getSalary())
+                {
+                    highest = i;
+                }
+            }
+
+            cout << "\n--- Manager with Highest Salary ---" << endl;
+            mgr[highest].displayManager();
+
+            break;
+        }
+
+        case 6:
+            cout << "\nProgram exited." << endl;
+            break;
+
+        default:
+            cout << "\nInvalid choice!" << endl;
+        }
+
+    } while (choice != 6);
+
+    return 0;
+}
