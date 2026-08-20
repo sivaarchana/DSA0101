@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+
+class FLOAT
+{
+    float value;
+
+public:
+
+    // Constructor
+    FLOAT(float v = 0)
+    {
+        value = v;
+    }
+
+    // Overload +
+    FLOAT operator+(FLOAT f)
+    {
+        return FLOAT(value + f.value);
+    }
+
+    // Overload -
+    FLOAT operator-(FLOAT f)
+    {
+        return FLOAT(value - f.value);
+    }
+
+    // Overload *
+    FLOAT operator*(FLOAT f)
+    {
+        return FLOAT(value * f.value);
+    }
+
+    // Overload /
+    FLOAT operator/(FLOAT f)
+    {
+        return FLOAT(value / f.value);
+    }
+
+    // Display function
+    void display()
+    {
+        cout << value << endl;
+    }
+};
+
+int main()
+{
+    FLOAT a(10.5);
+    FLOAT b(2.5);
+
+    FLOAT add = a + b;
+    FLOAT sub = a - b;
+    FLOAT mul = a * b;
+    FLOAT div = a / b;
+
+    cout << "Addition: ";
+    add.display();
+
+    cout << "Subtraction: ";
+    sub.display();
+
+    cout << "Multiplication: ";
+    mul.display();
+
+    cout << "Division: ";
+    div.display();
+
+    return 0;
+}
